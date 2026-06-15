@@ -1,8 +1,9 @@
 import { TaskItem } from './components/TaskItem';
-import type { Task } from './types';
-import { useState } from 'react';
+import type { Category, Task } from './types';
+import { act, useState } from 'react';
 import { AddTaskForm } from './components/AddTaskForm';
 import { useEffect } from 'react';
+import { CATEGORIES } from './types';
 
 
 const INITIAL_TASKS: Task[] = [
@@ -62,7 +63,29 @@ function App() {
     setTasks(tasks.filter((task) => task.id !== taskId));
   }
 
+  const editTask = (taskId: string, newText: string) => {
+    setTasks(
+      tasks.map((task) => {
+        if (task.id === taskId) {
+          return { ...task, text: newText};
+        }
+        return task;
+      })
+    );
+  };
 
+
+  const [activeFilter, setActiveFilter] = useState('all');
+  
+
+  let filteredTasks: Task[] = [];
+
+  if (activeFilter ===  'all') {
+    filteredTasks = tasks;
+  } else {
+    filteredTasks = tasks.filter((task) => task.categoryId === activeFilter);
+  }
+  
 
   return (
     <div style={{ padding: '2em' }}>
@@ -70,16 +93,34 @@ function App() {
 
       <AddTaskForm onAdd={addTask}/>
 
+      {/* filter */}
+      <div>
+        {
+          [{ id: "all", name: "All", color: ""}, ...CATEGORIES].map((category) => (
+            <button 
+            key={category.id} 
+            type="button"
+            style={{ background: category.id === activeFilter ? 'grey' : ''}}
+            onClick={() => setActiveFilter(category.id)}>{category.name}</button>
+          ))
+        }
+      </div>
+
+
+
       <div>
         
-        {tasks.map((task) => (
+        {
+        filteredTasks.map((task) => (
           <TaskItem 
           key={task.id}
           task={task}
           onToggle={toggleTask}
           onDelete={deleteTask}
+          onEdit={editTask}
           />
-        ))}
+        ))
+        }
 
       </div>
     </div>
