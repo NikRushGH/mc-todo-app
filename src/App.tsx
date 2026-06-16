@@ -7,9 +7,9 @@ import { CATEGORIES } from './types';
 
 
 const INITIAL_TASKS: Task[] = [
-  { id: "task-2", text: "Запиздить дракона у горы", isDone: true, categoryId: "misc", coordinates: { x: 228, y: 67, z: 322 } },
-  { id: "task-1", text: "Построить ядерный реактор у дома", isDone: false, categoryId: "tech", coordinates: { x: 100, y: 64, z: -200 } },
-  { id: "task-3", text: "Добыть алмазы", isDone: false, categoryId: "resources" },
+  { id: "task-2", text: "Запиздить дракона у горы", isDone: true, categoryId: "misc", coordinates: { x: 228, y: 67, z: 322 }, createdAt: 1000 },
+  { id: "task-1", text: "Построить ядерный реактор у дома", isDone: false, categoryId: "tech", coordinates: { x: 100, y: 64, z: -200 }, createdAt: 3000 },
+  { id: "task-3", text: "Добыть алмазы", isDone: false, categoryId: "resources", createdAt: 2000 },
 ];
 
 
@@ -52,7 +52,8 @@ function App() {
       text: text,
       isDone: false,
       categoryId: categoryId, 
-      coordinates: coordinates
+      coordinates: coordinates,
+      createdAt: Date.now()
     };
 
     setTasks([...tasks, newTask])
@@ -85,6 +86,15 @@ function App() {
   } else {
     filteredTasks = tasks.filter((task) => task.categoryId === activeFilter);
   }
+
+
+  const sortedTasks = [...filteredTasks].sort((a, b) => {
+    if (a.isDone === b.isDone) {
+      return b.createdAt - a.createdAt
+    } else {
+      return a.isDone ? 1 : -1
+    }
+  })
   
 
   return (
@@ -100,7 +110,7 @@ function App() {
             <button 
             key={category.id} 
             type="button"
-            style={{ background: category.id === activeFilter ? 'grey' : ''}}
+            style={{ background: category.id === activeFilter ? 'lightgrey' : ''}}
             onClick={() => setActiveFilter(category.id)}>{category.name}</button>
           ))
         }
@@ -111,7 +121,7 @@ function App() {
       <div>
         
         {
-        filteredTasks.map((task) => (
+        sortedTasks.map((task) => (
           <TaskItem 
           key={task.id}
           task={task}
