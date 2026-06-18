@@ -1,6 +1,8 @@
 import type { Task } from '../types';
 import { useState } from 'react';
 
+import { Input, Button, Chip } from "@heroui/react";
+
 
 interface TaskItemProps {
     task: Task;
@@ -22,26 +24,26 @@ const handleSave = () => {
 
     return (
         <div>
-            <input type="checkbox" checked={props.task.isDone} onChange={() => props.onToggle(props.task.id)} />
+            <Input type="checkbox" checked={props.task.isDone} onChange={() => props.onToggle(props.task.id)} />
 
             {isEditing ? (
                 <>
-                    <input type="text" value={editValue} onChange={(e) => setEditValue(e.target.value)} />
-                    <button onClick={handleSave}>Save</button>
+                    <Input type="text" value={editValue} onChange={(e) => setEditValue(e.target.value)} />
+                    <Button onClick={handleSave}>Save</Button>
                 </>
             ) : (
                 <>
                     <span>{props.task.text}</span>
-                    <button onClick={() => setIsEditing(true)}>Edit</button>
+                    <Button onClick={() => setIsEditing(true)}>Edit</Button>
                 </>
             )}
 
             {props.task.coordinates && (
-                <small>
-                    {` [${props.task.coordinates.x}, ${props.task.coordinates.y}, ${props.task.coordinates.z}]`},
-                </small>
+                <Chip>
+                    {` ${props.task.coordinates.x}, ${props.task.coordinates.y}, ${props.task.coordinates.z}`}
+                </Chip>
             )}
-            <button onClick={() => props.onDelete(props.task.id)}>Delete</button>
+            <Button onClick={() => props.onDelete(props.task.id)}>Delete</Button>
         </div>
     );
 }

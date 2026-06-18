@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { CATEGORIES } from '../types';
 
+import { Input, Button, Select, ListBox } from "@heroui/react";
+
 
 interface AddTaskFormProps {
     onAdd: (text: string, coordinates?: { x: number; y: number; z: number }, categoryId?: string) => void;
@@ -42,29 +44,48 @@ export function AddTaskForm(props: AddTaskFormProps) {
     };
 
     return (
-        <form onSubmit={handleSubmit} style={{ marginBottom: '20px', display: 'flex', gap: '10px' }}>
-            <input 
+        <form 
+        onSubmit={handleSubmit} 
+        style={{ marginBottom: '20px', display: 'flex', gap: '10px' }}>
+            
+            <Input 
                 type="text" 
                 placeholder="What to do?" 
                 value={text} 
                 onChange={(e) => setText(e.target.value)}
             />
 
-            <input type="number" placeholder="x" value={x} onChange={(e) => setX(e.target.value)} style={{ width: '60px' }} />
-            <input type="number" placeholder="y" value={y} onChange={(e) => setY(e.target.value)} style={{ width: '60px' }} />
-            <input type="number" placeholder="z" value={z} onChange={(e) => setZ(e.target.value)} style={{ width: '60px' }} />
-
-            <select value={categoryId} onChange={(e) => setCategoryId(e.target.value)}>
-                <option value="">No category</option>
-                {CATEGORIES.map((cat) => (
-                    <option key={cat.id} value={cat.id}>
-                        {cat.name}
-                    </option>
-                ))}
-            </select>
+            <Input type="number" placeholder="x" value={x} onChange={(e) => setX(e.target.value)} style={{ width: '60px' }} />
+            <Input type="number" placeholder="y" value={y} onChange={(e) => setY(e.target.value)} style={{ width: '60px' }} />
+            <Input type="number" placeholder="z" value={z} onChange={(e) => setZ(e.target.value)} style={{ width: '60px' }} />
 
 
-            <button type="submit">Add</button>
+            <Select 
+                placeholder="No category"
+                value={categoryId === '' ? null : categoryId}
+                onChange={(val) => setCategoryId(val !== null ? String(val) : '')}
+                className="w-32"
+            >
+                <Select.Trigger>
+                    <Select.Value />
+                    <Select.Indicator />
+                </Select.Trigger>
+                
+                <Select.Popover>
+                    <ListBox>
+                        <ListBox.Item id="" textValue="No category" className="text-gray-700">No category</ListBox.Item>
+                        
+                        {CATEGORIES.map((cat) => (
+                            <ListBox.Item key={cat.id} id={cat.id} textValue={cat.name} className="text-gray-700">
+                                {cat.name}
+                            </ListBox.Item>
+                        ))}
+                    </ListBox>
+                </Select.Popover>
+            </Select>
+
+
+            <Button type="submit">Add</Button>
         </form>
     );
 }

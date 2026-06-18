@@ -5,6 +5,10 @@ import { AddTaskForm } from './components/AddTaskForm';
 import { useEffect } from 'react';
 import { CATEGORIES } from './types';
 
+import { Card, Select, ListBox } from "@heroui/react";
+
+
+
 
 const INITIAL_TASKS: Task[] = [
   { id: "task-2", text: "Запиздить дракона у горы", isDone: true, categoryId: "misc", coordinates: { x: 228, y: 67, z: 322 }, createdAt: 1000 },
@@ -97,29 +101,33 @@ function App() {
   })
   
 
+
+
+
   return (
-    <div style={{ padding: '2em' }}>
-      <h1>Minecraft To-Do</h1>
+    <div className="min-h-screen flex justify-center items-center p-4">
 
-      <AddTaskForm onAdd={addTask}/>
+    
+    <Card className="w-full max-w-4xl p-6 flex flex-col gap-6 bg-white/10 backdrop-blur-md">
+      
+      <header className="flex justify-between items-center">
+        <h1 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-white/50 mb-8 drop-shadow-md" >Трекер задач</h1>
+        <div className="flex gap-2">
+           <Select name="" id="">Сортировка</Select>
+           <Select name="" id="">Фильтр</Select>
+           <Select name="" id="">Профиль</Select>
 
-      {/* filter */}
-      <div>
-        {
-          [{ id: "all", name: "All", color: ""}, ...CATEGORIES].map((category) => (
-            <button 
-            key={category.id} 
-            type="button"
-            style={{ background: category.id === activeFilter ? 'lightgrey' : ''}}
-            onClick={() => setActiveFilter(category.id)}>{category.name}</button>
-          ))
-        }
+        </div>
+      </header>
+
+      <div className="flex gap-2">
+        <AddTaskForm onAdd={addTask}/>
+
       </div>
 
 
+      <div className="flex flex-col gap-2">
 
-      <div>
-        
         {
         sortedTasks.map((task) => (
           <TaskItem 
@@ -131,9 +139,33 @@ function App() {
           />
         ))
         }
-
       </div>
+
+
+      <footer className="text-center">
+        <p>Задач: {tasks.length} • Выполнено: {tasks.filter((task) => task.isDone).length}</p>
+      </footer>
+
+    </Card>
+
+
+      {/* filter */}
+      {/* <div>
+        {
+          [{ id: "all", name: "All", color: ""}, ...CATEGORIES].map((category) => (
+            <Button
+            className="bg-white/10 backdrop-blur-md border border-white/20 text-white shadow-sm data-[hover=true]:bg-white/20"
+            key={category.id} 
+            type="button"
+            style={{ background: category.id === activeFilter ? 'black' : ''}}
+            onClick={() => setActiveFilter(category.id)}>{category.name}</Button>
+            
+          ))
+        }
+      </div> */}
+
     </div>
+    
   )
 }
 
