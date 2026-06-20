@@ -104,21 +104,42 @@ function App() {
 
 
 
-  return (
-    <div className="min-h-screen flex justify-center items-center p-4">
+return (
+  <div className="min-h-screen w-full bg-gradient-to-br from-slate-300 to-slate-400 flex justify-center pt-24 p-4 font-sans text-slate-700">
 
+  <Card className="w-full max-w-4xl min-h-[600px] p-8 flex flex-col gap-6 bg-white/60 backdrop-blur-2xl border border-white/50 shadow-2xl rounded-3xl">
     
-    <Card className="w-full max-w-4xl p-6 flex flex-col gap-6 bg-white/10 backdrop-blur-md">
-      
-      <header className="flex justify-between items-center">
-        <h1 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-white/50 mb-8 drop-shadow-md" >Трекер задач</h1>
-        <div className="flex gap-2">
-           <Select name="" id="">Сортировка</Select>
-           <Select name="" id="">Фильтр</Select>
-           <Select name="" id="">Профиль</Select>
+    <header className="flex justify-between items-center w-full">
 
-        </div>
-      </header>
+      <h1 className="text-2xl font-semibold text-gray-500 drop-shadow-sm">Minecraft To Do</h1>
+      
+      <div className="flex gap-2">
+          <Select 
+              aria-label="Filter tasks"
+              placeholder="Filter: All"
+              value={activeFilter}
+              onChange={(val) => setActiveFilter(val !== null ? String(val) : 'all')}
+              className="w-30"
+          >
+              <Select.Trigger className="bg-white/50 border border-slate-300 shadow-sm min-h-10 h-10">
+                  <Select.Value />
+                  <Select.Indicator />
+              </Select.Trigger>
+              
+              <Select.Popover>
+                <ListBox className="bg-white/90 backdrop-blur-md border border-slate-200 rounded-lg">
+                  <ListBox.Item id="all" textValue="Filter: All">All</ListBox.Item>
+                  {CATEGORIES.map((cat) => (
+                    <ListBox.Item key={cat.id} id={cat.id} textValue={cat.name}>
+                      {cat.name}
+                    </ListBox.Item>
+                  ))}
+                </ListBox>
+              </Select.Popover>
+          </Select>
+      </div>
+    </header>
+
 
       <div className="flex gap-2">
         <AddTaskForm onAdd={addTask}/>
@@ -143,26 +164,10 @@ function App() {
 
 
       <footer className="text-center">
-        <p>Задач: {tasks.length} • Выполнено: {tasks.filter((task) => task.isDone).length}</p>
+        <p>Tasks: {tasks.length} • Completed: {tasks.filter((task) => task.isDone).length}</p>
       </footer>
 
     </Card>
-
-
-      {/* filter */}
-      {/* <div>
-        {
-          [{ id: "all", name: "All", color: ""}, ...CATEGORIES].map((category) => (
-            <Button
-            className="bg-white/10 backdrop-blur-md border border-white/20 text-white shadow-sm data-[hover=true]:bg-white/20"
-            key={category.id} 
-            type="button"
-            style={{ background: category.id === activeFilter ? 'black' : ''}}
-            onClick={() => setActiveFilter(category.id)}>{category.name}</Button>
-            
-          ))
-        }
-      </div> */}
 
     </div>
     
