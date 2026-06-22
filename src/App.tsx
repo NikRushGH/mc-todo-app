@@ -68,11 +68,11 @@ function App() {
     setTasks(tasks.filter((task) => task.id !== taskId));
   }
 
-  const editTask = (taskId: string, newText: string) => {
+  const editTask = (taskId: string, newText: string, newCoords?: { x: number; y: number; z: number }) => {
     setTasks(
       tasks.map((task) => {
         if (task.id === taskId) {
-          return { ...task, text: newText};
+          return { ...task, text: newText, coordinates: newCoords};
         }
         return task;
       })
@@ -107,7 +107,7 @@ function App() {
 return (
   <div className="min-h-screen w-full bg-gradient-to-br from-slate-300 to-slate-400 flex justify-center pt-24 p-4 font-sans text-slate-700">
 
-  <Card className="w-full max-w-4xl min-h-[600px] p-8 flex flex-col gap-6 bg-white/60 backdrop-blur-2xl border border-white/50 shadow-2xl rounded-3xl">
+  <Card className="w-full max-w-4xl min-h-[600px] p-8 flex flex-col gap-6 bg-white/40 backdrop-blur-2xl border-2 border-white/60 shadow-2xl rounded-[2.5rem]">
     
     <header className="flex justify-between items-center w-full">
 
@@ -121,13 +121,13 @@ return (
               onChange={(val) => setActiveFilter(val !== null ? String(val) : 'all')}
               className="w-30"
           >
-              <Select.Trigger className="bg-white/50 border border-slate-300 shadow-sm min-h-10 h-10">
+              <Select.Trigger className="bg-white/50 text-slate-700 border border-white/40 shadow-sm">
                   <Select.Value />
                   <Select.Indicator />
               </Select.Trigger>
               
               <Select.Popover>
-                <ListBox className="bg-white/90 backdrop-blur-md border border-slate-200 rounded-lg">
+                <ListBox className="bg-white/50 text-slate-700 border border-white/40 shadow-sm rounded-lg">
                   <ListBox.Item id="all" textValue="Filter: All">All</ListBox.Item>
                   {CATEGORIES.map((cat) => (
                     <ListBox.Item key={cat.id} id={cat.id} textValue={cat.name}>
