@@ -36,7 +36,7 @@ const handleSave = () => {
 
 
     return (
-        <div className="flex items-start justify-between w-full mb-3 gap-3">
+        <div className="flex items-start justify-between w-full mb-3 gap-4">
             
             {/* LEFT PART */}
             <div className="flex items-start gap-3 w-full">
@@ -81,7 +81,7 @@ const handleSave = () => {
             {/* RIGHT PART */}
             <div className="flex items-center gap-2 shrink-0 -mt-1">
                 
-                <div className="w-[12rem] flex justify-end shrink-0">
+                <div className="flex items-center justify-end shrink-0 min-h-[32px]">
                     {isEditing ? (
                         <div className="flex gap-1">
                             <Input 

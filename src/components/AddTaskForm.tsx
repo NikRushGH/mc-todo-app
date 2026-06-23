@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { CATEGORIES } from '../types';
 
-import { Input, Button, Select, ListBox } from "@heroui/react";
+import { Form, Input, Button, Select, ListBox } from "@heroui/react";
+import { Plus } from '@gravity-ui/icons';
 
 
 interface AddTaskFormProps {
@@ -44,39 +45,61 @@ export function AddTaskForm(props: AddTaskFormProps) {
     };
 
     return (
-        <form 
-        onSubmit={handleSubmit} 
-        style={{ marginBottom: '20px', display: 'flex', gap: '10px' }}>
+        <Form 
+            onSubmit={handleSubmit} 
+            className="flex items-center gap-3 w-full bg-white/50 backdrop-blur-md border border-white/60 shadow-[0_3px_15px_5px_rgba(0,0,0,0.1)] rounded-2xl p-3"
+        >
             
             <Input 
                 type="text" 
-                placeholder="What to do?" 
+                placeholder="Task name..." 
                 value={text} 
                 onChange={(e) => setText(e.target.value)}
+                className="flex-1 bg-transparent border-none shadow-none text-[0.95rem] focus:outline-none focus:ring-0"
             />
 
-            <Input type="number" placeholder="x" value={x} onChange={(e) => setX(e.target.value)} style={{ width: '60px' }} />
-            <Input type="number" placeholder="y" value={y} onChange={(e) => setY(e.target.value)} style={{ width: '60px' }} />
-            <Input type="number" placeholder="z" value={z} onChange={(e) => setZ(e.target.value)} style={{ width: '60px' }} />
-
+            <div className="flex items-center gap-2 shrink-0">
+                <Input 
+                    type="number" 
+                    placeholder="X" 
+                    value={x} 
+                    onChange={(e) => setX(e.target.value)} 
+                    className="h-10 bg-white/50 text-slate-700 placeholder:text-slate-400 border border-white/40 shadow-sm text-[0.9rem] w-15 px-2 text-center rounded-xl [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" 
+                />
+                <Input 
+                    type="number" 
+                    placeholder="Y" 
+                    value={y} 
+                    onChange={(e) => setY(e.target.value)} 
+                    className="h-10 bg-white/50 text-slate-700 placeholder:text-slate-400 border border-white/40 shadow-sm text-[0.9rem] w-15 px-2 text-center rounded-xl [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" 
+                />
+                <Input 
+                    type="number" 
+                    placeholder="Z" 
+                    value={z} 
+                    onChange={(e) => setZ(e.target.value)} 
+                    className="h-10 bg-white/50 text-slate-700 placeholder:text-slate-400 border border-white/40 shadow-sm text-[0.9rem] w-15 px-2 text-center rounded-xl [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" 
+                />
+            </div>
 
             <Select 
+                aria-label="Category"
                 placeholder="No category"
                 value={categoryId === '' ? null : categoryId}
                 onChange={(val) => setCategoryId(val !== null ? String(val) : '')}
-                className="w-32"
+                className="w-36 shrink-0"
             >
-                <Select.Trigger>
-                    <Select.Value />
-                    <Select.Indicator />
+
+                <Select.Trigger className="bg-white/50 border border-white/40 shadow-sm h-10 min-h-10 rounded-xl items-center">
+                    <Select.Value className="text-slate-600 text-sm" />
+                    <Select.Indicator className="text-slate-500 mt-3" />
                 </Select.Trigger>
                 
                 <Select.Popover>
-                    <ListBox>
-                        <ListBox.Item id="" textValue="No category" className="text-gray-700">No category</ListBox.Item>
-                        
+                    <ListBox className="bg-white/90 backdrop-blur-md border border-slate-200 rounded-lg">
+                        <ListBox.Item id="" textValue="No category" className="text-slate-700">No category</ListBox.Item>
                         {CATEGORIES.map((cat) => (
-                            <ListBox.Item key={cat.id} id={cat.id} textValue={cat.name} className="text-gray-700">
+                            <ListBox.Item key={cat.id} id={cat.id} textValue={cat.name} className="text-slate-700">
                                 {cat.name}
                             </ListBox.Item>
                         ))}
@@ -85,7 +108,15 @@ export function AddTaskForm(props: AddTaskFormProps) {
             </Select>
 
 
-            <Button type="submit">Add</Button>
-        </form>
+            <Button 
+                type="submit" 
+                isIconOnly 
+                variant="ghost" 
+                className="text-slate-400 border-transparent hover:text-slate-500 hover:bg-slate-200/70 rounded-full shrink-0"
+            >
+                <Plus className="w-5 h-5" />
+            </Button>
+            
+        </Form>
     );
 }
