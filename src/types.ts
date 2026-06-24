@@ -20,7 +20,11 @@ export interface Task {
 
 
 export const CATEGORIES: Category[] = [
-  { id: "tech", name: "Technology", color: "#55aaff" },
-  { id: "magic", name: "Magic", color: "#aa00aa" },
-  { id: "resources", name: "Resources", color: "#ffaa00" }
+  { id: "resources", name: "Resources", color: "#fbbf24" },
+  { id: "building", name: "Building", color: "#2dd4bf" },
+  { id: "tech", name: "Technology", color: "#60a5fa" },
+  { id: "magic", name: "Magic", color: "#c084fc" },
+  { id: "farming", name: "Farming", color: "#a3e635" },
+  { id: "exploration", name: "Exploration", color: "#f472b6" },
+  { id: "combat", name: "Combat", color: "#f87171" }
 ];

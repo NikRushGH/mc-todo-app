@@ -47,7 +47,7 @@ export function AddTaskForm(props: AddTaskFormProps) {
     return (
         <Form 
             onSubmit={handleSubmit} 
-            className="flex items-center gap-3 w-full bg-white/50 backdrop-blur-md border border-white/60 shadow-[0_3px_15px_5px_rgba(0,0,0,0.1)] rounded-2xl p-3"
+            className="flex items-center gap-3 w-full bg-white/20 backdrop-blur-md border border-white/60 shadow-[0_3px_15px_5px_rgba(0,0,0,0.1)] rounded-2xl p-3"
         >
             
             <Input 
@@ -55,7 +55,7 @@ export function AddTaskForm(props: AddTaskFormProps) {
                 placeholder="Task name..." 
                 value={text} 
                 onChange={(e) => setText(e.target.value)}
-                className="flex-1 bg-transparent border-none shadow-none text-[0.95rem] focus:outline-none focus:ring-0"
+                className="flex-1 bg-transparent border-none shadow-none text-[0.95rem] focus:outline-none focus:ring-0 text-slate-700"
             />
 
             <div className="flex items-center gap-2 shrink-0">
@@ -95,14 +95,25 @@ export function AddTaskForm(props: AddTaskFormProps) {
                     <Select.Indicator className="text-slate-500 mt-3" />
                 </Select.Trigger>
                 
-                <Select.Popover>
-                    <ListBox className="bg-white/90 backdrop-blur-md border border-slate-200 rounded-lg">
-                        <ListBox.Item id="" textValue="No category" className="text-slate-700">No category</ListBox.Item>
+                <Select.Popover className="bg-white/60 backdrop-blur-xl border border-white/40 shadow-xl rounded-2xl">
+                    <ListBox className="bg-transparent p-1">
+                        
+                        <ListBox.Item id="" textValue="No category" className="text-slate-700 hover:bg-white/90">
+                            No category
+                        </ListBox.Item>
+                        
                         {CATEGORIES.map((cat) => (
-                            <ListBox.Item key={cat.id} id={cat.id} textValue={cat.name} className="text-slate-700">
-                                {cat.name}
+                            <ListBox.Item key={cat.id} id={cat.id} textValue={cat.name} className="text-slate-700 hover:bg-white/90">
+                                <div className="flex items-center gap-2">
+                                    <span 
+                                        className="w-2 h-2 rounded-full shrink-0" 
+                                        style={{ backgroundColor: cat.color }} 
+                                    />
+                                    {cat.name}
+                                </div>
                             </ListBox.Item>
                         ))}
+
                     </ListBox>
                 </Select.Popover>
             </Select>
@@ -112,7 +123,7 @@ export function AddTaskForm(props: AddTaskFormProps) {
                 type="submit" 
                 isIconOnly 
                 variant="ghost" 
-                className="text-slate-400 border-transparent hover:text-slate-500 hover:bg-slate-200/70 rounded-full shrink-0"
+                className="text-slate-400 border-transparent hover:text-slate-500 hover:bg-slate-300/60 rounded-full shrink-0"
             >
                 <Plus className="w-5 h-5" />
             </Button>

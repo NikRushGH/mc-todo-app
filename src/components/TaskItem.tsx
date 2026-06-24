@@ -1,7 +1,8 @@
 import type { Task } from '../types';
 import { useState } from 'react';
+import { CATEGORIES } from '../types';
 
-import { Input, Button, Chip, Checkbox, TextField, TextArea } from "@heroui/react";
+import { Input, Button, Chip, Checkbox, TextField, TextArea, Select, ListBox } from "@heroui/react";
 import { Pencil, TrashBin, Check } from '@gravity-ui/icons';
 
 
@@ -9,7 +10,7 @@ interface TaskItemProps {
     task: Task;
     onToggle: (taskId: string) => void;
     onDelete: (taskId: string) => void;
-    onEdit: (taskId: string, newText: string, newCoords?: { x: number; y: number; z: number }) => void;
+    onEdit: (taskId: string, newText: string, newCoords?: { x: number; y: number; z: number }, newCategoryId?: string) => void;
 }
 
 export function TaskItem(props: TaskItemProps){
@@ -19,6 +20,9 @@ export function TaskItem(props: TaskItemProps){
     const [editX, setEditX] = useState(props.task.coordinates?.x?.toString() || '');
     const [editY, setEditY] = useState(props.task.coordinates?.y?.toString() || '');
     const [editZ, setEditZ] = useState(props.task.coordinates?.z?.toString() || '');
+    const [editCategoryId, setEditCategoryId] = useState(props.task.categoryId || '');
+
+    const taskCategory = CATEGORIES.find(c => c.id === props.task.categoryId);
 
 
 const handleSave = () => {
@@ -30,7 +34,10 @@ const handleSave = () => {
                 z: Number(editZ) || 0 
             };
         }
-        props.onEdit(props.task.id, editValue, coords);
+
+        const finalCategoryId = editCategoryId === '' ? undefined : editCategoryId;
+
+        props.onEdit(props.task.id, editValue, coords, finalCategoryId);
         setIsEditing(false);
     }
 
@@ -79,9 +86,11 @@ const handleSave = () => {
 
 
             {/* RIGHT PART */}
-            <div className="flex items-center gap-2 shrink-0 -mt-1">
+            <div className="flex items-start gap-2 shrink-0">
                 
-                <div className="flex items-center justify-end shrink-0 min-h-[32px]">
+                <div className="flex flex-col items-end justify-start shrink-0 min-h-[32px] gap-1.5 pt-1/2">
+                    
+
                     {isEditing ? (
                         <div className="flex gap-1">
                             <Input 
@@ -112,9 +121,63 @@ const handleSave = () => {
                             </Chip>
                         )
                     )}
+
+
+                    {isEditing ? (
+                        <Select 
+                            aria-label="Category"
+                            placeholder="No category"
+                            value={editCategoryId === '' ? null : editCategoryId}
+                            onChange={(val) => setEditCategoryId(val !== null ? String(val) : '')}
+                            className="w-[235px] shrink-0"
+                        >
+                            <Select.Trigger className="bg-white/50 border border-white/40 shadow-sm h-10 min-h-10 rounded-xl flex items-center">
+                                <Select.Value className="text-slate-600 text-sm" />
+                                <Select.Indicator className="text-slate-500" />
+                            </Select.Trigger>
+                            
+                            <Select.Popover className="bg-white/60 backdrop-blur-xl border border-white/40 shadow-xl rounded-xl">
+                                <ListBox className="bg-transparent p-1">
+                                    <ListBox.Item id="" textValue="No category" className="text-slate-700 hover:bg-white/90">No category</ListBox.Item>
+                                    {CATEGORIES.map((cat) => (
+                                        <ListBox.Item 
+                                            key={cat.id} 
+                                            id={cat.id} 
+                                            textValue={cat.name} 
+                                            className="text-slate-700 hover:bg-white/90"
+                                        >   
+                                            {/* COLOR DOT */}
+                                            <div className="flex items-center gap-2">
+                                                <span 
+                                                    className="w-2 h-2 rounded-full shrink-0" 
+                                                    style={{ backgroundColor: cat.color }} 
+                                                />
+                                                {cat.name}
+                                            </div>
+                                        </ListBox.Item>
+                                    ))}
+                                </ListBox>
+                            </Select.Popover>
+                        </Select>
+                    ) : (
+                        taskCategory && (
+                            <Chip 
+                                variant="secondary" 
+                                size="md" 
+                                className="bg-white/50 text-slate-600 border border-white/40 shadow-sm text-xs flex items-center gap-1.5"
+                            >
+                                <span 
+                                    className="w-1.5 h-1.5 rounded-full shrink-0" 
+                                    style={{ backgroundColor: taskCategory.color }} 
+                                />
+                                {taskCategory.name}
+                            </Chip>
+                        )
+                    )}
                 </div>
 
-                <div className="flex gap-1 shrink-0">
+                {/* BUTTONS */}
+                <div className="flex gap-1 shrink-0 -mt-1">
                     {isEditing ? (
                         <Button isIconOnly variant="ghost" className="text-emerald-600 border-transparent hover:bg-emerald-100/50 items-start" onClick={handleSave}>
                             <Check width={20} />

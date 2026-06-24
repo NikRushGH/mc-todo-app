@@ -3,6 +3,10 @@
 
 
 
+html {
+  font-size: 125% !important;
+}
+
 
 :root, [data-theme="light"] {
   --accent: 100 116 139;
