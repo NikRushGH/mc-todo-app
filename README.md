@@ -1,73 +1,36 @@
-# React + TypeScript + Vite
+# Game Task Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A clean, glassmorphism-styled application designed to track in-game goals, builds, and exact locations across any open-world, survival, or RPG game.
 
-Currently, two official plugins are available:
+<img width="800" alt="App Screenshot" src="https://github.com/user-attachments/assets/39d1732a-dcdf-4050-8116-eec39df021af" />
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Technologies Used
+* **Framework:** React
+* **Language:** TypeScript
+* **Styling:** Tailwind CSS
+* **UI Components:** HeroUI
+* **Build Tool:** Vite
 
-## React Compiler
+## Core Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Task Management
+* Create, complete, and delete tasks easily.
+* **Inline Editing:** Update task text, coordinates, and categories directly in the list without opening separate modal windows.
+* Interactive onboarding tutorial presented as default tasks.
 
-## Expanding the ESLint configuration
+### Gamer-Focused Utilities
+* **Coordinate Tracker:** Save exact X, Y, and Z coordinates to never lose a base, quest location, or hidden stash again.
+* **Category System:** Color-coded task categories created for gameplay (Resources, Building, Technology, Magic, Exploration, etc.).
+* Dropdown filtering to easily sort tasks by their category.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### UI & UX Design
+* "Glassmorphism" interface with dynamic blur and translucent layers.
+* Optically aligned metadata chips and action buttons.
+* Fixed-height layout with a custom scrollbar and a smooth bottom fade-out mask to prevent layout shifts.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Planned Features
+* **PWA Conversion:** Turn the application into a fully installable Progressive Web App (PWA).
+* **Mobile Responsiveness:** Adapt the glass UI and layout for a seamless experience on smartphones and tablets.
+* **Game-Specific Integrations:** Connect the app directly to game clients, starting with a custom Minecraft Java mod for live task synchronization (developed in a separate repository).
+* **Drag and Drop:** Functionality for easy task reordering.
+* **Customization:** User-created categories and custom color selection.

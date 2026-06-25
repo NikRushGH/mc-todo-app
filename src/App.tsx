@@ -152,7 +152,7 @@ function App() {
             <Card className="w-full max-w-4xl h-[85vh] min-h-[600px] max-h-[900px] p-8 flex flex-col gap-6 bg-white/40 backdrop-blur-2xl border-1 border-white/60 shadow-2xl rounded-[2.5rem]">
               
               <header className="flex justify-between items-center w-full shrink-0">
-                <h1 className="text-2xl font-semibold text-gray-500 drop-shadow-sm">Minecraft To Do</h1>
+                <h1 className="text-2xl font-semibold text-gray-500 drop-shadow-sm">Game Task Tracker</h1>
                 
                 <div className="flex gap-2">
                     <Select 
