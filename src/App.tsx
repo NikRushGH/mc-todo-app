@@ -147,20 +147,20 @@ function App() {
 
 
   return (
-        <div className="min-h-screen w-full bg-gradient-to-br from-slate-300 to-slate-400 flex justify-center pt-16 pb-16 p-4 font-sans text-slate-700">
+        <div className="fixed inset-0 w-full h-full bg-gradient-to-br from-slate-300 to-slate-400 flex justify-center p-2 sm:p-4 pt-2 sm:pt-16 pb-2 sm:pb-16 font-sans text-slate-700 overflow-hidden">
 
-            <Card className="w-full max-w-4xl h-[85vh] min-h-[600px] max-h-[900px] p-8 flex flex-col gap-6 bg-white/40 backdrop-blur-2xl border-1 border-white/60 shadow-2xl rounded-[2.5rem]">
+            <Card className="w-full max-w-4xl h-[98dvh] sm:h-[85vh] min-h-[600px] max-h-[900px] p-4 sm:p-8 flex flex-col gap-4 sm:gap-6 bg-white/40 backdrop-blur-2xl border-1 border-white/60 shadow-2xl rounded-3xl sm:rounded-[2.5rem]">
               
-              <header className="flex justify-between items-center w-full shrink-0">
-                <h1 className="text-2xl font-semibold text-gray-500 drop-shadow-sm">Game Task Tracker</h1>
+              <header className="flex flex-col sm:flex-row justify-between items-start sm:items-center w-full shrink-0 gap-3 sm:gap-0">
+                <h1 className="text-xl sm:text-2xl font-semibold text-gray-500 drop-shadow-sm">Game Task Tracker</h1>
                 
-                <div className="flex gap-2">
+                <div className="flex gap-2 w-full sm:w-auto">
                     <Select 
                         aria-label="Filter tasks"
                         placeholder="Filter: All"
                         value={activeFilter}
                         onChange={(val) => setActiveFilter(val !== null ? String(val) : 'all')}
-                        className="w-32"
+                        className="w-full sm:w-32"
                     >
                         <Select.Trigger className="bg-white/50 text-slate-700 border border-white/40 shadow-sm rounded-xl h-10 min-h-10 flex items-center">
                             <Select.Value className="text-sm" />
@@ -193,7 +193,7 @@ function App() {
                 <AddTaskForm onAdd={addTask}/>
               </div>
 
-              <div className="flex-1 overflow-y-auto pr-3 flex flex-col gap-2 [mask-image:linear-gradient(to_bottom,black_90%,transparent_100%)] [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:bg-slate-400/30 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-slate-400/50">
+              <div className="flex-1 overflow-y-auto pr-2 sm:pr-3 flex flex-col gap-2 [mask-image:linear-gradient(to_bottom,transparent_0%,black_2%,black_93%,transparent_100%)] [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:bg-slate-400/30 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-slate-400/50">
                 
                 <div className="pt-2">
                   {sortedTasks.map((task) => (
@@ -209,7 +209,7 @@ function App() {
 
               </div>
 
-              <footer className="text-center shrink-0 text-sm text-slate-500 font-medium">
+              <footer className="text-center shrink-0 text-xs sm:text-sm text-slate-500 font-medium">
                 <p>Tasks: {tasks.length} • Completed: {tasks.filter((task) => task.isDone).length}</p>
               </footer>
 

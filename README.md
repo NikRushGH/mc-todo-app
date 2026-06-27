@@ -30,7 +30,6 @@ A clean, glassmorphism-styled application designed to track in-game goals, build
 
 ## Planned Features
 * **PWA Conversion:** Turn the application into a fully installable Progressive Web App (PWA).
-* **Mobile Responsiveness:** Adapt the glass UI and layout for a seamless experience on smartphones and tablets.
 * **Game-Specific Integrations:** Connect the app directly to game clients, starting with a custom Minecraft Java mod for live task synchronization (developed in a separate repository).
 * **Drag and Drop:** Functionality for easy task reordering.
 * **Customization:** User-created categories and custom color selection.

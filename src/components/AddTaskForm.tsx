@@ -47,7 +47,7 @@ export function AddTaskForm(props: AddTaskFormProps) {
     return (
         <Form 
             onSubmit={handleSubmit} 
-            className="flex items-center gap-3 w-full bg-white/20 backdrop-blur-md border border-white/60 shadow-[0_3px_15px_5px_rgba(0,0,0,0.1)] rounded-2xl p-3"
+            className="grid grid-cols-[1fr_auto] sm:flex sm:flex-row items-center gap-3 w-full bg-white/20 backdrop-blur-md border border-white/60 shadow-[0_3px_15px_5px_rgba(0,0,0,0.1)] rounded-2xl p-3"
         >
             
             <Input 
@@ -55,75 +55,76 @@ export function AddTaskForm(props: AddTaskFormProps) {
                 placeholder="Task name..." 
                 value={text} 
                 onChange={(e) => setText(e.target.value)}
-                className="flex-1 bg-transparent border-none shadow-none text-[0.95rem] focus:outline-none focus:ring-0 text-slate-700"
+                className="col-start-1 row-start-1 w-full sm:flex-1 bg-transparent border-none shadow-none text-[0.95rem] focus:outline-none focus:ring-0 text-slate-700"
             />
 
-            <div className="flex items-center gap-2 shrink-0">
-                <Input 
-                    type="number" 
-                    placeholder="X" 
-                    value={x} 
-                    onChange={(e) => setX(e.target.value)} 
-                    className="h-10 bg-white/50 text-slate-700 placeholder:text-slate-400 border border-white/40 shadow-sm text-[0.9rem] w-15 px-2 text-center rounded-xl [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" 
-                />
-                <Input 
-                    type="number" 
-                    placeholder="Y" 
-                    value={y} 
-                    onChange={(e) => setY(e.target.value)} 
-                    className="h-10 bg-white/50 text-slate-700 placeholder:text-slate-400 border border-white/40 shadow-sm text-[0.9rem] w-15 px-2 text-center rounded-xl [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" 
-                />
-                <Input 
-                    type="number" 
-                    placeholder="Z" 
-                    value={z} 
-                    onChange={(e) => setZ(e.target.value)} 
-                    className="h-10 bg-white/50 text-slate-700 placeholder:text-slate-400 border border-white/40 shadow-sm text-[0.9rem] w-15 px-2 text-center rounded-xl [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" 
-                />
-            </div>
-
-            <Select 
-                aria-label="Category"
-                placeholder="No category"
-                value={categoryId === '' ? null : categoryId}
-                onChange={(val) => setCategoryId(val !== null ? String(val) : '')}
-                className="w-36 shrink-0"
-            >
-
-                <Select.Trigger className="bg-white/50 border border-white/40 shadow-sm h-10 min-h-10 rounded-xl items-center">
-                    <Select.Value className="text-slate-600 text-sm" />
-                    <Select.Indicator className="text-slate-500 mt-3" />
-                </Select.Trigger>
+            <div className="col-span-2 col-start-1 row-start-2 sm:col-auto sm:row-auto flex items-center gap-2 sm:gap-3 w-full sm:w-auto">
                 
-                <Select.Popover className="bg-white/60 backdrop-blur-xl border border-white/40 shadow-xl rounded-2xl">
-                    <ListBox className="bg-transparent p-1">
-                        
-                        <ListBox.Item id="" textValue="No category" className="text-slate-700 hover:bg-white/90">
-                            No category
-                        </ListBox.Item>
-                        
-                        {CATEGORIES.map((cat) => (
-                            <ListBox.Item key={cat.id} id={cat.id} textValue={cat.name} className="text-slate-700 hover:bg-white/90">
-                                <div className="flex items-center gap-2">
-                                    <span 
-                                        className="w-2 h-2 rounded-full shrink-0" 
-                                        style={{ backgroundColor: cat.color }} 
-                                    />
-                                    {cat.name}
-                                </div>
+                <div className="flex items-center gap-1 sm:gap-2 shrink-0">
+                    <Input 
+                        type="number" 
+                        placeholder="X" 
+                        value={x} 
+                        onChange={(e) => setX(e.target.value)} 
+                        className="h-10 bg-white/50 text-slate-700 placeholder:text-slate-400 border border-white/40 shadow-sm text-[0.9rem] w-12 sm:w-15 px-0 sm:px-2 text-center rounded-xl [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" 
+                    />
+                    <Input 
+                        type="number" 
+                        placeholder="Y" 
+                        value={y} 
+                        onChange={(e) => setY(e.target.value)} 
+                        className="h-10 bg-white/50 text-slate-700 placeholder:text-slate-400 border border-white/40 shadow-sm text-[0.9rem] w-12 sm:w-15 px-0 sm:px-2 text-center rounded-xl [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" 
+                    />
+                    <Input 
+                        type="number" 
+                        placeholder="Z" 
+                        value={z} 
+                        onChange={(e) => setZ(e.target.value)} 
+                        className="h-10 bg-white/50 text-slate-700 placeholder:text-slate-400 border border-white/40 shadow-sm text-[0.9rem] w-12 sm:w-15 px-0 sm:px-2 text-center rounded-xl [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" 
+                    />
+                </div>
+
+                <Select 
+                    aria-label="Category"
+                    placeholder="No category"
+                    value={categoryId === '' ? null : categoryId}
+                    onChange={(val) => setCategoryId(val !== null ? String(val) : '')}
+                    className="flex-1 sm:w-36 shrink-0"
+                >
+                    <Select.Trigger className="bg-white/50 border border-white/40 shadow-sm h-10 min-h-10 rounded-xl items-center px-2">
+                        <Select.Value className="text-slate-600 text-sm truncate" />
+                        <Select.Indicator className="text-slate-500 mt-3" />
+                    </Select.Trigger>
+                    
+                    <Select.Popover className="bg-white/60 backdrop-blur-xl border border-white/40 shadow-xl rounded-2xl">
+                        <ListBox className="bg-transparent p-1">
+                            
+                            <ListBox.Item id="" textValue="No category" className="text-slate-700 hover:bg-white/90">
+                                No category
                             </ListBox.Item>
-                        ))}
+                            
+                            {CATEGORIES.map((cat) => (
+                                <ListBox.Item key={cat.id} id={cat.id} textValue={cat.name} className="text-slate-700 hover:bg-white/90">
+                                    <div className="flex items-center gap-2">
+                                        <span 
+                                            className="w-2 h-2 rounded-full shrink-0" 
+                                            style={{ backgroundColor: cat.color }} 
+                                        />
+                                        {cat.name}
+                                    </div>
+                                </ListBox.Item>
+                            ))}
 
-                    </ListBox>
-                </Select.Popover>
-            </Select>
-
+                        </ListBox>
+                    </Select.Popover>
+                </Select>
+            </div>
 
             <Button 
                 type="submit" 
                 isIconOnly 
                 variant="ghost" 
-                className="text-slate-400 border-transparent hover:text-slate-500 hover:bg-slate-300/60 rounded-full shrink-0"
+                className="col-start-2 row-start-1 sm:col-auto sm:row-auto text-slate-400 border-transparent hover:text-slate-500 hover:bg-slate-300/60 rounded-full shrink-0"
             >
                 <Plus className="w-5 h-5" />
             </Button>

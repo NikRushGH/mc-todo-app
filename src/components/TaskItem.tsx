@@ -43,7 +43,8 @@ const handleSave = () => {
 
 
     return (
-        <div className="flex items-start justify-between w-full mb-3 gap-4">
+
+        <div className="flex flex-col sm:flex-row sm:items-start justify-between w-full mb-3 gap-2 sm:gap-4">
             
             {/* LEFT PART */}
             <div className="flex items-start gap-3 w-full">
@@ -60,7 +61,7 @@ const handleSave = () => {
                 </Checkbox>
 
                 {isEditing ? (
-                    <TextField className="w-full">
+                    <TextField className="w-full flex-1">
                         <TextArea 
                             value={editValue} 
                             onChange={(e) => {
@@ -74,23 +75,21 @@ const handleSave = () => {
                                     el.style.height = `${el.scrollHeight}px`;
                                 }
                             }}
-                            className="resize-none overflow-hidden bg-white/50 text-slate-700 border border-white/40 shadow-sm"
+                            className="w-full resize-none overflow-hidden bg-white/50 text-slate-700 border border-white/40 shadow-sm"
                         />
                     </TextField>
                 ) : (
-                    <span className={`break-words ${props.task.isDone ? "line-through text-slate-400" : ""}`}>
+                    <span className={`break-words flex-1 ${props.task.isDone ? "line-through text-slate-400" : ""}`}>
                         {props.task.text}
                     </span>
                 )}
             </div>
 
-
             {/* RIGHT PART */}
-            <div className="flex items-start gap-2 shrink-0">
+            <div className="flex items-start justify-between sm:justify-end w-full sm:w-auto gap-2 shrink-0 pl-7 sm:pl-0">
                 
-                <div className="flex flex-col items-end justify-start shrink-0 min-h-[32px] gap-1.5 pt-1/2">
+                <div className="flex flex-col items-start sm:items-end justify-start shrink-0 min-h-[32px] gap-1.5 pt-1/2">
                     
-
                     {isEditing ? (
                         <div className="flex gap-1">
                             <Input 
@@ -98,21 +97,21 @@ const handleSave = () => {
                             placeholder="X" 
                             value={editX} 
                             onChange={(e) => setEditX(e.target.value)} 
-                            className="bg-white/50 text-slate-700 border border-white/40 shadow-sm text-[0.9rem] w-15 px-2 text-center [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" />
+                            className="bg-white/50 text-slate-700 border border-white/40 shadow-sm text-[0.9rem] w-12 sm:w-15 px-0 sm:px-2 text-center [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" />
 
                             <Input 
                             type="number" 
                             placeholder="Y" 
                             value={editY} 
                             onChange={(e) => setEditY(e.target.value)} 
-                            className="bg-white/50 text-slate-700 border border-white/40 shadow-sm text-[0.9rem] w-15 px-2 text-center [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" />
+                            className="bg-white/50 text-slate-700 border border-white/40 shadow-sm text-[0.9rem] w-12 sm:w-15 px-0 sm:px-2 text-center [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" />
 
                             <Input 
                             type="number" 
                             placeholder="Z" 
                             value={editZ} 
                             onChange={(e) => setEditZ(e.target.value)} 
-                            className="bg-white/50 text-slate-700 border border-white/40 shadow-sm text-[0.9rem] w-15 px-2 text-center [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" />
+                            className="bg-white/50 text-slate-700 border border-white/40 shadow-sm text-[0.9rem] w-12 sm:w-15 px-0 sm:px-2 text-center [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" />
                         </div>
                     ) : (
                         props.task.coordinates && (
@@ -122,14 +121,13 @@ const handleSave = () => {
                         )
                     )}
 
-
                     {isEditing ? (
                         <Select 
                             aria-label="Category"
                             placeholder="No category"
                             value={editCategoryId === '' ? null : editCategoryId}
                             onChange={(val) => setEditCategoryId(val !== null ? String(val) : '')}
-                            className="w-[235px] shrink-0"
+                            className="w-38 sm:w-47 shrink-0"
                         >
                             <Select.Trigger className="bg-white/50 border border-white/40 shadow-sm h-10 min-h-10 rounded-xl flex items-center">
                                 <Select.Value className="text-slate-600 text-sm" />
@@ -177,7 +175,7 @@ const handleSave = () => {
                 </div>
 
                 {/* BUTTONS */}
-                <div className="flex gap-1 shrink-0 -mt-1">
+                <div className="flex gap-1 shrink-0 -mt-1.5 sm:-mt-1">
                     {isEditing ? (
                         <Button isIconOnly variant="ghost" className="text-emerald-600 border-transparent hover:bg-emerald-100/50 items-start" onClick={handleSave}>
                             <Check width={20} />
